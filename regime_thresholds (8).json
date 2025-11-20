@@ -1,0 +1,57 @@
+{
+  "version": "2.0",
+  "generated_at_utc": "2025-11-18T09:09:15.104645Z",
+  "description": "Sprint 2 weekly regime detection thresholds based on VIX, cross-asset correlation, and realized volatility.",
+  "time_scale": "weekly",
+  "feature_window_weeks": 4,
+  "vix": {
+    "name": "4-week average VIX level",
+    "feature_key": "vix_level",
+    "use_zscore": true,
+    "z_enter": 1.2,
+    "z_exit": 0.4,
+    "abs_enter_level": 22.0,
+    "min_history_weeks": 52
+  },
+  "correlation": {
+    "name": "4-week median cross-asset correlation",
+    "feature_key": "corr_4w",
+    "use_zscore": true,
+    "z_enter": 1.5,
+    "z_exit": 0.5,
+    "abs_enter_level": 0.6,
+    "min_assets_required": 40,
+    "window_weeks": 4
+  },
+  "realized_vol": {
+    "name": "4-week realized volatility (index or portfolio proxy)",
+    "feature_key": "rv_4w",
+    "enabled": true,
+    "use_zscore": true,
+    "z_enter": 1.3,
+    "z_exit": 0.5,
+    "annualization_factor": 52
+  },
+  "probability_mapping": {
+    "method": "sigmoid_max_z",
+    "a": 1.0,
+    "b": 0.0,
+    "clamp_min": 0.01,
+    "clamp_max": 0.99,
+    "max_z_sources": [
+      "vix",
+      "correlation",
+      "realized_vol"
+    ]
+  },
+  "hysteresis": {
+    "prob_enter": 0.6,
+    "prob_exit": 0.4,
+    "confirm_ticks": 2
+  },
+  "fallback": {
+    "default_regime": "normal",
+    "default_probability": 0.0,
+    "emit_p1_on_data_outage": true
+  }
+}
