@@ -1,0 +1,39 @@
+
+{
+  "version": "1.0",
+  "date_generated": "2025-01-01",
+  "description": "Regime detection thresholds for Sprint 2.",
+
+  "lookback_days": 252,
+  "window_days": 30,
+
+  "vix": {
+    "z_enter": 1.2,
+    "z_exit": 0.5,
+    "abs_enter_level": 22.0
+  },
+
+  "correlation": {
+    "z_enter": 1.5,
+    "z_exit": 0.7,
+    "abs_enter_level": 0.70
+  },
+
+  "probability": {
+    "enter": 0.60,
+    "exit": 0.40,
+    "confirm_steps": 2
+  },
+
+  "sigmoid": {
+    "a": 1.0,
+    "b": 0.0,
+    "clamp_min": 0.01,
+    "clamp_max": 0.99
+  },
+
+  "fallback": {
+    "default_regime": "normal",
+    "default_probability": 0.0
+  }
+}

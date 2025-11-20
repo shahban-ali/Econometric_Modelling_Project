@@ -1,0 +1,33 @@
+
+# Factor Rules - Sprint 2
+# Author: Shahban
+# Date: 2025-01-01
+
+min_viable_factors: 4
+max_factors_to_drop_per_day: 2
+
+required_factors:
+  - value
+  - momentum
+
+oos_r2:
+  train_days: 60
+  test_days: 30
+  threshold: 0.0
+  negative_streak_days: 5
+  min_observations: 45
+
+factor_universe:
+  predefined:
+    - value
+    - momentum
+    - quality
+    - size
+    - volatility
+
+alerts:
+  p1_integrity: "PagerDuty"
+  p2_dropout: "SlackWebhook"
+
+performance:
+  cache_hours: 1
